@@ -22,7 +22,6 @@
   * [Use Arduino Library Manager](#use-arduino-library-manager)
   * [Manual Install](#manual-install)
   * [VS Code & PlatformIO](#vs-code--platformio)
-* [Packages' Patches](#packages-patches)
 * [HOWTO Fix `Multiple Definitions` Linker Error](#howto-fix-multiple-definitions-linker-error)
 * [How It Works](#how-it-works) 
 * [HOWTO Basic configurations](#howto-basic-configurations)
@@ -39,7 +38,6 @@
   * [Callbacks](#callbacks)
     * [Save settings](#save-settings)
   * [ConfigPortal Timeout](#configportal-timeout) 
-  * [On Demand ConfigPortal](#on-demand-configportal)
   * [Custom Parameters](#custom-parameters)
   * [Custom IP Configuration](#custom-ip-configuration) 
     * [Custom Access Point IP Configuration (currently not working)](#custom-access-point-ip-configuration-currently-not-working)
@@ -467,85 +465,7 @@ which will wait 2 minutes (120 seconds). When the time passes, the startConfigPo
 In this case, the `startConfigPortal` function will stay until you save config data or exit the Config Portal.
 
 
-#### On Demand ConfigPortal
-
-Example usage
-
-```cpp
-void loop()
-{
-  // is configuration portal requested?
-  if ((digitalRead(TRIGGER_PIN) == LOW) || (digitalRead(TRIGGER_PIN2) == LOW))
-  {
-    Serial.println("\nConfiguration portal requested.");
-    digitalWrite(PIN_LED, LED_ON); // turn the LED on by making the voltage LOW to tell us we are in configuration mode.
-
-    //Local intialization. Once its business is done, there is no need to keep it around
-    WIO_WiFiManager WIO_wifiManager;
-
-    WIO_wifiManager.setMinimumSignalQuality(-1);
-
-    // From v1.0.10 only
-    // Set config portal channel, default = 1. Use 0 => random channel from 1-13
-    //WIO_wifiManager.setConfigPortalChannel(0);
-    //////
-
-    //set custom ip for portal
-    //WIO_wifiManager.setAPStaticIPConfig(IPAddress(192, 168, 100, 1), IPAddress(192, 168, 100, 1), IPAddress(255, 255, 255, 0));
-
-#if !USE_DHCP_IP
-#if USE_CONFIGURABLE_DNS
-    // Set static IP, Gateway, Subnetmask, DNS1 and DNS2. New in v1.0.5
-    //WIO_wifiManager.setSTAStaticIPConfig(stationIP, gatewayIP, netMask, dns1IP, dns2IP);
-#else
-    // Set static IP, Gateway, Subnetmask, Use auto DNS1 and DNS2.
-    //WIO_wifiManager.setSTAStaticIPConfig(stationIP, gatewayIP, netMask);
-#endif
-#endif
-
-    // New from v1.1.1
-#if USING_CORS_FEATURE
-    //WIO_wifiManager.setCORSHeader("Your Access-Control-Allow-Origin");
-#endif
-
-    //Check if there is stored WiFi router/password credentials.
-    //If not found, device will remain in configuration mode until switched off via webserver.
-    Serial.print("Opening configuration portal. ");
-    Router_SSID = WIO_wifiManager.getSSID();
-    //Router_Pass = WIO_wifiManager.getPassword();
-
-    // From v1.1.0, Don't permit NULL password
-    if ( (Router_SSID != "") && (Router_Pass != "") )
-    {
-      WIO_wifiManager.setConfigPortalTimeout(120); //If no access point name has been previously entered disable timeout.
-      Serial.println("Got stored Credentials. Timeout 120s");
-    }
-    else
-      Serial.println("No stored Credentials. No timeout");
-
-    //Starts an access point
-    //and goes into a blocking loop awaiting configuration
-    if (!WIO_wifiManager.startConfigPortal((const char *) ssid.c_str(), password))
-    {
-      Serial.println("Not connected to WiFi but continuing anyway.");
-    }
-    else
-    {
-      //if you get here you have connected to the WiFi
-      Serial.println("connected...yeey :)");
-      Serial.print("Local IP: ");
-      Serial.println(WiFi.localIP());
-    }
-
-    digitalWrite(PIN_LED, LED_OFF); // Turn led off as we are not in configuration mode.
-  }
-
-  // put your main code here, to run repeatedly
-  check_status();
-}
-```
-
-See  [ConfigOnSwitch](examples/ConfigOnSwitch) example for a more complex version.
+See  [ConfigOnDoubleReset](examples/ConfigOnDoubleReset) example for a more complex version.
 
 ---
 ---
@@ -644,7 +564,7 @@ Config Portal (CP) was requested to input and save WiFi Credentials. The boards 
 ```
 Starting ConfigOnDoubleReset with DoubleResetDetect on RASPBERRY_PI_PICO_W
 WiFiManager_RP2040W v1.0.0
-[WM] RFC925 Hostname = RP2040W_179A4E
+[WM] RFC925 Hostname = RP2040W-179A4E
 [WM] Set CORS Header to :  Your Access-Control-Allow-Origin
 LittleFS Flag read = 0xd0d01234
 Flag read = 0xd0d01234
@@ -733,7 +653,7 @@ HH
 ```
 Starting ConfigOnDoubleReset with DoubleResetDetect on RASPBERRY_PI_PICO_W
 WiFiManager_RP2040W v1.0.0
-[WM] RFC925 Hostname = RP2040W11BD0A
+[WM] RFC925 Hostname = RP2040W-11BD0A
 [WM] Set CORS Header to :  Your Access-Control-Allow-Origin
 LittleFS Flag read = 0xd0d04321
 Flag read = 0xd0d04321
