@@ -117,9 +117,6 @@ The best and easiest way is to use `Arduino Library Manager`. Search for `WiFiMa
 ---
 
 
----
----
-
 ### HOWTO Fix `Multiple Definitions` Linker Error
 
 The current library implementation, using `xyz-Impl.h` instead of standard `xyz.cpp`, possibly creates certain `Multiple Definitions` Linker error in certain use cases.
