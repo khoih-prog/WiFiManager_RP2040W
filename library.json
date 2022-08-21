@@ -1,0 +1,60 @@
+{
+  "name": "WiFiManager_RP2040W",
+  "version": "1.0.0",
+  "keywords": "wifi, wi-fi, multi-wifi, config-portal, Double-Reset, dynamic-params, LittleFS, Credentials, file-system, webserver, rp2040, rp2040w, raspberry-pi-pico-w, cyw43439",
+  "description": "Light-Weight MultiWiFi/Credentials Manager for RP2040W boards using built-in CYW43439 WiFi. Powerful-yet-simple-to-use feature to enable adding dynamic custom parameters. Library to configure MultiWiFi/Credentials at runtime for RP2040W boards, using CYW43439 WiFi. You can also specify DHCP HostName and STA IP. Use much less memory compared to full-fledge WiFiManager. Config Portal will be auto-adjusted to match the number of dynamic custom parameters. Optional default Credentials to be autoloaded into Config Portal to use or change instead of manually input. Credentials are saved in LittleFS. New powerful-yet-simple-to-use feature to enable adding dynamic custom parameters from sketch and input using the same Config Portal. DoubleDetectDetector as well as Virtual Switches feature permits entering Config Portal as requested. Now using WiFiMulti_Generic library",
+  "authors": 
+  [
+    {
+      "name":  "Khoi Hoang",
+      "url":   "https://github.com/khoih-prog",
+      "email": "khoih-prog@gmail.com",
+      "maintainer": true
+    }  
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/khoih-prog/WiFiManager_RP2040W"
+  },
+  "homepage": "https://github.com/khoih-prog/WiFiManager_RP2040W",
+  "export": {
+    "exclude": [
+      "linux",
+      "extras",
+      "tests"
+    ]
+  },
+  "dependencies": 
+  [
+    {
+      "owner": "khoih-prog",
+      "name": "WiFiWebServer",
+      "version": "^1.9.3",
+      "platforms": ["*"]
+    },
+    {
+      "owner": "khoih-prog",
+      "name": "WiFiMulti_Generic",
+      "version": ">=1.2.2",
+      "platforms": ["*"]
+    },
+    {
+      "owner": "khoih-prog",
+      "name": "DoubleResetDetector_Generic",
+      "version": "^1.8.1",
+      "platforms": ["*"]
+    },
+    {
+      "owner": "khoih-prog",
+      "name": "Functional-Vlpp",
+      "version": "^1.0.2",
+      "platforms": ["*"]
+    }
+  ],
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "raspberrypi",
+  "examples": "examples/*/*/*.ino",
+  "headers": "WiFiManager_RP2040W.h"
+}
