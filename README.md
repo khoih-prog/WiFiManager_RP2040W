@@ -16,6 +16,9 @@
 
 * [Why do we need this WiFiManager_RP2040W library](#why-do-we-need-this-WiFiManager_RP2040W-library)
   * [Features](#features)
+  * [Important Notes](#Important-Notes)
+  
+  
 * [Changelog](changelog.md) 
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
@@ -79,13 +82,17 @@ to provide support to `RASPBERRY_PI_PICO_W with CYW43439 WiFi`.
 
 This is a WiFi Connection manager with fallback web ConfigPortal. It's using a web ConfigPortal, served from the `RASPBERRY_PI_PICO_W`, and operating as an access point.
 
+#### Important Notes
+
+1. To be used with [`arduino-pico core v2.4.1+`](https://github.com/earlephilhower/arduino-pico) because of dependency on `DNSServer` library.
+
 ---
 ---
 
 ## Prerequisites
 
 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
-2. [`Earle Philhower's arduino-pico core v2.4.0+`](https://github.com/earlephilhower/arduino-pico) for **RASPBERRY_PI_PICO_W with CYW43439 WiFi**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+2. [`Earle Philhower's arduino-pico core v2.4.1+`](https://github.com/earlephilhower/arduino-pico) for **RASPBERRY_PI_PICO_W with CYW43439 WiFi**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 3. [`Functional-Vlpp library v1.0.2+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
 4. [`WiFiWebServer library v1.9.3+`](https://github.com/khoih-prog/WiFiWebServer). To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiWebServer.svg?)](https://www.ardu-badge.com/WiFiWebServer)
 5. [`DoubleResetDetector_Generic v1.8.1+`](https://github.com/khoih-prog/DoubleResetDetector_Generic). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/DoubleResetDetector_Generic.svg?)](https://www.ardu-badge.com/DoubleResetDetector_Generic)
@@ -150,10 +157,10 @@ String ssid = "RP2040W_ConfigPortal";
 const char* password = "RP2040W_Pass";
 ```
 
-then connect WebBrowser to configurable ConfigPortal IP address, default is 192.168.42.1
+then connect WebBrowser to configurable ConfigPortal IP address, default is **192.168.42.1**
 
 - Choose one of the access points scanned, enter password, click ***Save***.
-- RP2040W_ will restart, then try to connect to the WiFi network using STA-only mode.
+- RP2040W will restart, then try to connect to the WiFi network using STA-only mode.
 
 ---
 ---
@@ -382,7 +389,7 @@ In `ConfigPortal Mode`, it starts an access point called `RP2040W_ConfigPortal`.
 String ssid = "RP2040W_ConfigPortal";
 const char* password = "RP2040W_Pass";
 ```
-After you connected, please, go to http://192.168.42.1, you'll see this `Main` page:
+After you connected, please, go to `http://192.168.42.1`, you'll see this `Main` page:
 
 <p align="center">
     <img src="https://github.com/khoih-prog/WiFiManager_RP2040W/blob/main/Images/Main.png">
@@ -449,7 +456,7 @@ void saveConfigCallback ()
 
 #### ConfigPortal Timeout
 
-If you need to set a timeout so the `RP2040W_` doesn't hang waiting to be configured for ever. 
+If you need to set a timeout so the `RP2040W` doesn't hang waiting to be configured for ever. 
 
 ```cpp
 #define CONFIG_PORTAL_TIMEOUT_SEC       120
