@@ -16,9 +16,7 @@
 
 * [Why do we need this WiFiManager_RP2040W library](#why-do-we-need-this-WiFiManager_RP2040W-library)
   * [Features](#features)
-  * [Important Notes](#Important-Notes)
-  
-  
+  * [Important Notes](#Important-Notes) 
 * [Changelog](changelog.md) 
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
