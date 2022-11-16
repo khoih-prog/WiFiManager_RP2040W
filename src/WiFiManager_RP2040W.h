@@ -4,7 +4,7 @@
 
   WiFiManager_RP2040W is a library for the SeeedStudiocWIO Terminal/Arduino platform
 
-  Modified from 
+  Modified from
   1) Tzapu        https://github.com/tzapu/WiFiManager
   2) Ken Taylor   https://github.com/kentaylor
   3) Khoi Hoang   https://github.com/khoih-prog/WiFiManager_RP2040W
