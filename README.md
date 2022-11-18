@@ -191,7 +191,7 @@ WiFiMulti_Generic wifiMulti;
 #include <DoubleResetDetector_Generic.h>      //https://github.com/khoih-prog/DoubleResetDetector_Generic
 
 // Number of seconds after reset during which a
-// subseqent reset will be considered a double reset.
+// subsequent reset will be considered a double reset.
 #define DRD_TIMEOUT             10
 
 // RTC Memory Address for the DoubleResetDetector to use
